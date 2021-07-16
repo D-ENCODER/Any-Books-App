@@ -2,7 +2,7 @@
     package="com.example.any_books">
     <uses-permission android:name="android.permission.VIBRATE"/>
    <application
-        android:label="any_books"
+        android:label="Any Books"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
