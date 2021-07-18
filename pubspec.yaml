@@ -17,6 +17,7 @@ dependencies:
   flutter_vibrate: ^1.1.0
   syncfusion_flutter_pdfviewer: ^19.2.44-beta
   rflutter_alert: ^2.0.2
+  flutter_rating_bar: ^4.0.0
 
 dev_dependencies:
   flutter_test:

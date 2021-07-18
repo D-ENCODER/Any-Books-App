@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:ui';
 import 'package:any_books/forgot_password.dart';
 import 'package:any_books/home.dart';
-import 'package:any_books/main.dart';
 import 'package:any_books/register.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
