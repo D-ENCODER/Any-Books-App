@@ -1,17 +1,17 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'bug_issues.dart';
 
-class FeedbackWidget extends StatefulWidget {
-  const FeedbackWidget({Key? key}) : super(key: key);
+
+class Suggestions extends StatefulWidget {
+  const Suggestions({ Key? key }) : super(key: key);
 
   @override
-  _FeedbackWidgetState createState() => _FeedbackWidgetState();
+  _SuggestionsState createState() => _SuggestionsState();
 }
 
-class _FeedbackWidgetState extends State<FeedbackWidget> {
+class _SuggestionsState extends State<Suggestions> {
   toast(String msg, Toast toast, ToastGravity toastGravity, Color colors) {
     Fluttertoast.showToast(
       msg: msg,
@@ -24,10 +24,10 @@ class _FeedbackWidgetState extends State<FeedbackWidget> {
   }
 
   final _firestore = FirebaseFirestore.instance;
-  String messagetext = '';
-  String name = '';
   String emailid = '';
-  double rate = 0;
+  String bookname = '';
+  String bookauthor = '';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -84,7 +84,7 @@ class _FeedbackWidgetState extends State<FeedbackWidget> {
               child: Row(
                 children: [
                   Text(
-                    'Name :-',
+                    'Book Name',
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                   SizedBox(
@@ -95,7 +95,7 @@ class _FeedbackWidgetState extends State<FeedbackWidget> {
                       keyboardType: TextInputType.emailAddress,
                       textAlign: TextAlign.center,
                       onChanged: (value) {
-                        name = value;
+                        bookname = value;
                       },
                       style: TextStyle(color: Colors.black),
                       decoration: kTextFeildDecoration.copyWith(
@@ -111,37 +111,7 @@ class _FeedbackWidgetState extends State<FeedbackWidget> {
               child: Row(
                 children: [
                   Text(
-                    'Ratings :-',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  RatingBar.builder(
-                    initialRating: 0,
-                    minRating: 0.5,
-                    glowColor: Color(0xffEAF9FE),
-                    direction: Axis.horizontal,
-                    allowHalfRating: true,
-                    itemCount: 5,
-                    itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
-                    itemBuilder: (context, _) => Icon(
-                      Icons.star,
-                      color: Color(0xff478CA8),
-                    ),
-                    onRatingUpdate: (rating) {
-                      rate = rating;
-                    },
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                  Text(
-                    'Comment :-',
+                    'Author:-',
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                   SizedBox(
@@ -149,12 +119,10 @@ class _FeedbackWidgetState extends State<FeedbackWidget> {
                   ),
                   Expanded(
                     child: TextField(
-                      minLines: 5,
-                      maxLines: 50,
                       keyboardType: TextInputType.emailAddress,
                       textAlign: TextAlign.center,
                       onChanged: (value) {
-                        messagetext = value;
+                        bookauthor = value;
                       },
                       style: TextStyle(color: Colors.black),
                       decoration: kTextFeildDecoration.copyWith(
@@ -169,16 +137,14 @@ class _FeedbackWidgetState extends State<FeedbackWidget> {
                 colour: Color(0xff478CA8),
                 title: 'SEND',
                 onPressed: () {
-                  if (rate != 0 &&
-                      name != '' &&
+                  if (bookname != '' &&
                       emailid != '' &&
-                      messagetext != '') {
-                    _firestore.collection('feedback').add(
+                      bookauthor != '') {
+                    _firestore.collection('suggestions').add(
                       {
-                        'comments': messagetext,
+                        'author': bookauthor,
                         'email': emailid,
-                        'name': name,
-                        'ratings': rate,
+                        'name': bookname,
                       },
                     );
                     toast('Thanks for your feedback', Toast.LENGTH_LONG,

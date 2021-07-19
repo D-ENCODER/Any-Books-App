@@ -1,7 +1,7 @@
 import 'package:any_books/Terms_and_conditions.dart';
 import 'package:any_books/bug_issues.dart';
-import 'package:any_books/main.dart';
 import 'package:any_books/privacy_policy.dart';
+import 'package:any_books/suggest.dart';
 import 'package:any_books/topics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -128,7 +128,16 @@ class _HomeWidgetState extends State<HomeWidget> {
             ),
           ),
           GestureDetector(
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return Suggestions();
+                  },
+                ),
+              );
+            },
             child: MyCard(
               location: 'assets/topics9.png',
               title: 'Suggest some books',

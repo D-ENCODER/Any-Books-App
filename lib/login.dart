@@ -213,6 +213,8 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                                           email: email, password: password);
                                     } catch (e) {
                                       Fluttertoast.showToast(msg: e.toString());
+                                      Fluttertoast.showToast(
+                                          msg: 'Invalid Email or password');
                                     }
                                     Navigator.push(
                                       context,

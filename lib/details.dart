@@ -128,11 +128,13 @@ class DetailsPage extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) {
-                      return Scaffold(
-                        body: Container(
-                          child: SfPdfViewer.network(
-                            '$pdfurl',
-                            searchTextHighlightColor: Color(0xffEAF9FE),
+                      return SafeArea(
+                        child: Scaffold(
+                          body: Container(
+                            child: SfPdfViewer.network(
+                              '$pdfurl',
+                              searchTextHighlightColor: Color(0xffEAF9FE),
+                            ),
                           ),
                         ),
                       );

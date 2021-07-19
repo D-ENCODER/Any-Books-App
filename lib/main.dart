@@ -1,6 +1,3 @@
-import 'package:any_books/categories/harry_potter.dart';
-import 'package:any_books/categories/programming.dart';
-import 'package:any_books/categories/space.dart';
 import 'package:any_books/splash.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -26,57 +23,6 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.light,
       ),
       home: MyCustomSplashScreen(),
-    );
-  }
-}
-
-class TopicsWidget extends StatefulWidget {
-  const TopicsWidget({Key? key}) : super(key: key);
-
-  @override
-  _TopicsWidgetState createState() => _TopicsWidgetState();
-}
-
-class _TopicsWidgetState extends State<TopicsWidget> {
-  @override
-  Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: Color(0xffEAF9FE),
-        appBar: AppBar(
-          toolbarHeight: 80,
-          backgroundColor: Color(0xff478CA8),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(30),
-              bottomRight: Radius.circular(30),
-            ),
-          ),
-          title: Center(
-            child: Text('ANY BOOKS'),
-          ),
-        ),
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              CategoriesWidget(
-                title: 'Space Exploration',
-                category: SpaceExploration(),
-              ),
-              SizedBox(),
-              CategoriesWidget(
-                title: 'Programming',
-                category: Programming(),
-              ),
-              SizedBox(),
-              CategoriesWidget(
-                title: 'Harry Potter',
-                category: Harrypotter(),
-              ),
-            ],
-          ),
-        ),
-      ),
     );
   }
 }

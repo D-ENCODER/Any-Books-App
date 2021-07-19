@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:any_books/login.dart';
+import 'package:any_books/onboard.dart';
 import 'package:flutter/material.dart';
 
 class MyCustomSplashScreen extends StatefulWidget {
@@ -56,7 +56,7 @@ class _MyCustomSplashScreenState extends State<MyCustomSplashScreen>
               context,
               MaterialPageRoute(
                 builder: (context) {
-                  return Login();
+                  return MyIntroScreen();
                 },
               ),
             );
