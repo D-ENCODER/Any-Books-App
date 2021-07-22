@@ -18,10 +18,16 @@ class _MyTopicsWidgetState extends State<MyTopicsWidget> {
   late Timer timer;
   @override
   void initState() {
-    this.timer = Timer.periodic(Duration(seconds: 4), (timer) {
+    this.timer = Timer.periodic(Duration(seconds: 2), (timer) {
       setState(() {});
     });
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    timer.cancel();
+    super.dispose();
   }
 
   final _firestore = FirebaseFirestore.instance;

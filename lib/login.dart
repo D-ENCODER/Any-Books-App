@@ -16,6 +16,7 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> with TickerProviderStateMixin {
+  bool _showPassword = false;
   late AnimationController controller1;
   late AnimationController controller2;
   late Animation<double> animation1;
@@ -192,10 +193,10 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                               email = value;
                             },
                           ),
-                          component1(
+                          passwordfield(
                             Icons.lock_outline,
                             'Password...',
-                            true,
+                            !this._showPassword,
                             false,
                             (value) {
                               password = value;
@@ -321,6 +322,59 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
               prefixIcon: Icon(
                 icon,
                 color: Colors.black.withOpacity(.7),
+              ),
+              border: InputBorder.none,
+              hintMaxLines: 1,
+              hintText: hintText,
+              hintStyle:
+                  TextStyle(fontSize: 14, color: Colors.black.withOpacity(.5)),
+            ),
+            onChanged: onChanged,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget passwordfield(IconData icon, String hintText, bool isPassword,
+      bool isEmail, Function(String)? onChanged) {
+    double _width = MediaQuery.of(context).size.width;
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(15),
+      child: BackdropFilter(
+        filter: ImageFilter.blur(
+          sigmaY: 15,
+          sigmaX: 15,
+        ),
+        child: Container(
+          height: _width / 8,
+          width: _width / 1.2,
+          alignment: Alignment.center,
+          padding: EdgeInsets.only(right: _width / 30),
+          decoration: BoxDecoration(
+            color: Colors.white.withOpacity(.05),
+            borderRadius: BorderRadius.circular(15),
+          ),
+          child: TextField(
+            style: TextStyle(color: Colors.black.withOpacity(.8)),
+            cursorColor: Colors.black,
+            obscureText: isPassword,
+            keyboardType:
+                isEmail ? TextInputType.emailAddress : TextInputType.text,
+            decoration: InputDecoration(
+              prefixIcon: Icon(
+                icon,
+                color: Colors.black.withOpacity(.7),
+              ),
+              suffixIcon: IconButton(
+                icon: Icon(
+                  Icons.remove_red_eye,
+                  color:
+                      this._showPassword ? Color(0xff478CA8) : Colors.grey[850],
+                ),
+                onPressed: () {
+                  setState(() => this._showPassword = !this._showPassword);
+                },
               ),
               border: InputBorder.none,
               hintMaxLines: 1,
