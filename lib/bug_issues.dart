@@ -43,6 +43,7 @@ class _BugIssueState extends State<BugIssue> {
         ),
       ),
       body: SingleChildScrollView(
+        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         child: Container(
           child: Column(
             children: [

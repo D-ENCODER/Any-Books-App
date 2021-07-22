@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_vibrate/flutter_vibrate.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -104,6 +105,7 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
       body: ScrollConfiguration(
         behavior: MyBehavior(),
         child: SingleChildScrollView(
+          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           child: SizedBox(
             height: _height,
             child: Stack(
@@ -205,7 +207,7 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                               component2(
                                 'LOGIN',
                                 2.58,
-                                () {
+                                () async {
                                   if (email != '' && password != '') {
                                     Vibrate.feedback(FeedbackType.success);
                                     try {
@@ -216,6 +218,10 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                                       Fluttertoast.showToast(
                                           msg: 'Invalid Email or password');
                                     }
+                                    SharedPreferences prefs =
+                                        await SharedPreferences.getInstance();
+
+                                    await prefs.setBool('login', true);
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(

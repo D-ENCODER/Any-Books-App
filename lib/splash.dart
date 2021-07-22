@@ -1,6 +1,9 @@
 import 'dart:async';
+import 'package:any_books/home.dart';
+import 'package:any_books/login.dart';
 import 'package:any_books/onboard.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MyCustomSplashScreen extends StatefulWidget {
   @override
@@ -148,4 +151,55 @@ class PageTransition extends PageRouteBuilder {
             );
           },
         );
+}
+
+class IsUserLoggedIn extends StatefulWidget {
+  const IsUserLoggedIn({Key? key}) : super(key: key);
+
+  @override
+  _IsUserLoggedInState createState() => _IsUserLoggedInState();
+}
+
+class _IsUserLoggedInState extends State<IsUserLoggedIn> {
+  Future checkFirstLogin() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool _login = (prefs.getBool('login') ?? false);
+
+    if (_login == false) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) {
+            return Login();
+          },
+        ),
+      );
+    } else {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) {
+            return HomeWidget();
+          },
+        ),
+      );
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+        future: checkFirstLogin(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          } else {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+        });
+  }
 }

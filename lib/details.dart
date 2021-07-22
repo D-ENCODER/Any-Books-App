@@ -128,13 +128,26 @@ class DetailsPage extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) {
-                      return SafeArea(
-                        child: Scaffold(
-                          body: Container(
-                            child: SfPdfViewer.network(
-                              '$pdfurl',
-                              searchTextHighlightColor: Color(0xffEAF9FE),
+                      return Scaffold(
+                        backgroundColor: Color(0xffEAF9FE),
+                        appBar: AppBar(
+                          toolbarHeight: 80,
+                          backgroundColor: Color(0xff478CA8),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(30),
+                              bottomRight: Radius.circular(30),
                             ),
+                          ),
+                          title: Align(
+                            alignment: Alignment.center,
+                            child: Text(bookName),
+                          ),
+                        ),
+                        body: Container(
+                          child: SfPdfViewer.network(
+                            '$pdfurl',
+                            searchTextHighlightColor: Color(0xffEAF9FE),
                           ),
                         ),
                       );

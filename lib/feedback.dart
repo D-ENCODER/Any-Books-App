@@ -47,6 +47,7 @@ class _FeedbackWidgetState extends State<FeedbackWidget> {
         ),
       ),
       body: SingleChildScrollView(
+        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         child: Column(
           children: [
             SizedBox(

@@ -1,12 +1,14 @@
 import 'package:any_books/Terms_and_conditions.dart';
 import 'package:any_books/bug_issues.dart';
 import 'package:any_books/privacy_policy.dart';
+import 'package:any_books/splash.dart';
 import 'package:any_books/suggest.dart';
 import 'package:any_books/topics.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 import 'feedback.dart';
 
 class HomeWidget extends StatefulWidget {
@@ -17,11 +19,29 @@ class HomeWidget extends StatefulWidget {
 }
 
 class _HomeWidgetState extends State<HomeWidget> {
+  final _auth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xffEAF9FE),
       appBar: AppBar(
+        actions: [
+          IconButton(
+              onPressed: () async {
+                _auth.signOut();
+                SharedPreferences prefs = await SharedPreferences.getInstance();
+                await prefs.setBool('login', false);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return IsUserLoggedIn();
+                    },
+                  ),
+                );
+              },
+              icon: Icon(Icons.logout))
+        ],
         automaticallyImplyLeading: false,
         toolbarHeight: 80,
         backgroundColor: Color(0xff478CA8),
@@ -144,7 +164,37 @@ class _HomeWidgetState extends State<HomeWidget> {
             ),
           ),
           GestureDetector(
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return Scaffold(
+                      backgroundColor: Color(0xffEAF9FE),
+                      appBar: AppBar(
+                        toolbarHeight: 80,
+                        backgroundColor: Color(0xff478CA8),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(30),
+                            bottomRight: Radius.circular(30),
+                          ),
+                        ),
+                        title: Align(
+                          alignment: Alignment.center,
+                          child: Text('ANY BOOKS'),
+                        ),
+                      ),
+                      body: Center(
+                          child: Text(
+                        'Comming Soon.....',
+                        style: TextStyle(fontSize: 22),
+                      )),
+                    );
+                  },
+                ),
+              );
+            },
             child: MyCard(
               location: 'assets/topics8.png',
               title: 'Donate Us',
@@ -155,6 +205,7 @@ class _HomeWidgetState extends State<HomeWidget> {
               Alert(
                 context: context,
                 style: AlertStyle(
+                  isOverlayTapDismiss: false,
                   backgroundColor: Color(0xff478CA8),
                   animationDuration: Duration(milliseconds: 500),
                 ),

@@ -1,4 +1,5 @@
 import 'package:any_books/login.dart';
+import 'package:any_books/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:introduction_screen/introduction_screen.dart';
@@ -20,7 +21,7 @@ class _MyIntroScreenState extends State<MyIntroScreen> {
         context,
         MaterialPageRoute(
           builder: (context) {
-            return Login();
+            return IsUserLoggedIn();
           },
         ),
       );
@@ -66,7 +67,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
 
   void _onIntroEnd(context) {
     Navigator.of(context).push(
-      MaterialPageRoute(builder: (_) => Login()),
+      MaterialPageRoute(builder: (_) => IsUserLoggedIn()),
     );
   }
 

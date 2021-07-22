@@ -108,6 +108,7 @@ class _RegisterState extends State<Register> with TickerProviderStateMixin {
       body: ScrollConfiguration(
         behavior: MyBehavior(),
         child: SingleChildScrollView(
+          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           child: SizedBox(
             height: _height,
             child: Stack(

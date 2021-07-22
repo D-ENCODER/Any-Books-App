@@ -47,6 +47,7 @@ class _SuggestionsState extends State<Suggestions> {
         ),
       ),
       body: SingleChildScrollView(
+        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         child: Column(
           children: [
             SizedBox(
@@ -99,7 +100,7 @@ class _SuggestionsState extends State<Suggestions> {
                       },
                       style: TextStyle(color: Colors.black),
                       decoration: kTextFeildDecoration.copyWith(
-                        hintText: 'Enter your Name',
+                        hintText: 'Enter book Name',
                       ),
                     ),
                   ),
@@ -126,7 +127,7 @@ class _SuggestionsState extends State<Suggestions> {
                       },
                       style: TextStyle(color: Colors.black),
                       decoration: kTextFeildDecoration.copyWith(
-                        hintText: 'Comment your feedback',
+                        hintText: 'Enter auther name',
                       ),
                     ),
                   ),
@@ -147,7 +148,7 @@ class _SuggestionsState extends State<Suggestions> {
                         'name': bookname,
                       },
                     );
-                    toast('Thanks for your feedback', Toast.LENGTH_LONG,
+                    toast('Thanks for your suggestion you will get your book soon.', Toast.LENGTH_LONG,
                         ToastGravity.BOTTOM, Colors.black);
                     Navigator.pushReplacement(
                       context,
