@@ -8,7 +8,7 @@
 ![Alt Text](/assets/promote/out.gif)
 
 ## Download the app
-[![Download Now](/assets/promote/download.png)](https://drive.google.com/uc?export=download&id=1YSe8U8vXluVIBPWTk_E5CusDmAC45UCy)
+[![Download Now](/assets/promote/Download.png)](https://drive.google.com/uc?export=download&id=1YSe8U8vXluVIBPWTk_E5CusDmAC45UCy)
 
 ## VS Code Extentions that i use
 - [Auto Rename Tag](https://marketplace.visualstudio.com/items?itemName=formulahendry.auto-rename-tag)
