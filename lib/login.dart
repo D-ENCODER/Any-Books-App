@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_vibrate/flutter_vibrate.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Login extends StatefulWidget {
@@ -101,191 +102,227 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     double _height = MediaQuery.of(context).size.height;
     double _width = MediaQuery.of(context).size.width;
-    return Scaffold(
-      backgroundColor: Color(0xffEAF9FE),
-      body: ScrollConfiguration(
-        behavior: MyBehavior(),
-        child: SingleChildScrollView(
-          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-          child: SizedBox(
-            height: _height,
-            child: Stack(
-              children: [
-                Positioned(
-                  top: _height * (animation2.value + .6),
-                  left: _width * .2,
-                  child: CustomPaint(
-                    painter: MyPainter(50),
+    return WillPopScope(
+      onWillPop: () async {
+        Alert(
+          context: context,
+          style: AlertStyle(
+            isOverlayTapDismiss: false,
+            backgroundColor: Color(0xff478CA8),
+            animationDuration: Duration(milliseconds: 500),
+          ),
+          type: AlertType.none,
+          title: "EXIT APP ?",
+          desc: "Are you sure you want to exit the app ?",
+          buttons: [
+            DialogButton(
+              child: Text(
+                "Yes",
+                style: TextStyle(color: Colors.white, fontSize: 20),
+              ),
+              onPressed: () =>
+                  SystemChannels.platform.invokeMethod('SystemNavigator.pop'),
+              color: Colors.grey[700],
+            ),
+            DialogButton(
+              child: Text(
+                "No",
+                style: TextStyle(color: Colors.white, fontSize: 20),
+              ),
+              onPressed: () => Navigator.pop(context),
+              color: Colors.grey[500],
+            )
+          ],
+        ).show();
+        return true;
+      },
+      child: Scaffold(
+        backgroundColor: Color(0xffEAF9FE),
+        body: ScrollConfiguration(
+          behavior: MyBehavior(),
+          child: SingleChildScrollView(
+            keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+            child: SizedBox(
+              height: _height,
+              child: Stack(
+                children: [
+                  Positioned(
+                    top: _height * (animation2.value + .6),
+                    left: _width * .2,
+                    child: CustomPaint(
+                      painter: MyPainter(50),
+                    ),
                   ),
-                ),
-                Positioned(
-                  top: _height * .98,
-                  left: _width * .1,
-                  child: CustomPaint(
-                    painter: MyPainter(animation4.value - 30),
+                  Positioned(
+                    top: _height * .98,
+                    left: _width * .1,
+                    child: CustomPaint(
+                      painter: MyPainter(animation4.value - 30),
+                    ),
                   ),
-                ),
-                Positioned(
-                  top: _height * .5,
-                  left: _width * (animation2.value + .8),
-                  child: CustomPaint(
-                    painter: MyPainter(30),
+                  Positioned(
+                    top: _height * .5,
+                    left: _width * (animation2.value + .8),
+                    child: CustomPaint(
+                      painter: MyPainter(30),
+                    ),
                   ),
-                ),
-                Positioned(
-                  top: _height * animation3.value,
-                  left: _width * (animation1.value + .1),
-                  child: CustomPaint(
-                    painter: MyPainter(60),
+                  Positioned(
+                    top: _height * animation3.value,
+                    left: _width * (animation1.value + .1),
+                    child: CustomPaint(
+                      painter: MyPainter(60),
+                    ),
                   ),
-                ),
-                Positioned(
-                  top: _height * .1,
-                  left: _width * .8,
-                  child: CustomPaint(
-                    painter: MyPainter(animation4.value),
+                  Positioned(
+                    top: _height * .1,
+                    left: _width * .8,
+                    child: CustomPaint(
+                      painter: MyPainter(animation4.value),
+                    ),
                   ),
-                ),
-                Column(
-                  children: [
-                    Expanded(
-                      flex: 4,
-                      child: Padding(
-                        padding: EdgeInsets.only(top: _height * .1),
-                        child: Text(
-                          'ANY BOOKS',
-                          style: TextStyle(
-                            color: Colors.black.withOpacity(.7),
-                            fontSize: 30,
-                            fontWeight: FontWeight.bold,
-                            letterSpacing: 1,
-                            wordSpacing: 4,
+                  Column(
+                    children: [
+                      Expanded(
+                        flex: 4,
+                        child: Padding(
+                          padding: EdgeInsets.only(top: _height * .1),
+                          child: Text(
+                            'ANY BOOKS',
+                            style: TextStyle(
+                              color: Colors.black.withOpacity(.7),
+                              fontSize: 30,
+                              fontWeight: FontWeight.bold,
+                              letterSpacing: 1,
+                              wordSpacing: 4,
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    Expanded(
-                      flex: 2,
-                      child: Padding(
-                        padding: EdgeInsets.only(top: 3),
-                        child: Text(
-                          'LOGIN',
-                          style: TextStyle(
-                            color: Colors.black.withOpacity(.7),
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            letterSpacing: 2,
+                      Expanded(
+                        flex: 2,
+                        child: Padding(
+                          padding: EdgeInsets.only(top: 3),
+                          child: Text(
+                            'LOGIN',
+                            style: TextStyle(
+                              color: Colors.black.withOpacity(.7),
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              letterSpacing: 2,
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    Expanded(
-                      flex: 7,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          component1(
-                            Icons.email_outlined,
-                            'Email...',
-                            false,
-                            true,
-                            (value) {
-                              email = value;
-                            },
-                          ),
-                          passwordfield(
-                            Icons.lock_outline,
-                            'Password...',
-                            !this._showPassword,
-                            false,
-                            (value) {
-                              password = value;
-                            },
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              component2(
-                                'LOGIN',
-                                2.58,
-                                () async {
-                                  if (email != '' && password != '') {
-                                    Vibrate.feedback(FeedbackType.success);
-                                    try {
-                                      _auth.signInWithEmailAndPassword(
-                                          email: email, password: password);
-                                    } catch (e) {
-                                      Fluttertoast.showToast(msg: e.toString());
-                                      Fluttertoast.showToast(
-                                          msg: 'Invalid Email or password');
-                                    }
-                                    SharedPreferences prefs =
-                                        await SharedPreferences.getInstance();
+                      Expanded(
+                        flex: 7,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            component1(
+                              Icons.email_outlined,
+                              'Email...',
+                              false,
+                              true,
+                              (value) {
+                                email = value;
+                              },
+                            ),
+                            passwordfield(
+                              Icons.lock_outline,
+                              'Password...',
+                              !this._showPassword,
+                              false,
+                              (value) {
+                                password = value;
+                              },
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                component2(
+                                  'LOGIN',
+                                  2.58,
+                                  () async {
+                                    if (email != '' && password != '') {
+                                      Vibrate.feedback(FeedbackType.success);
+                                      try {
+                                        _auth.signInWithEmailAndPassword(
+                                            email: email, password: password);
+                                      } catch (e) {
+                                        Fluttertoast.showToast(
+                                            msg: e.toString());
+                                        Fluttertoast.showToast(
+                                            msg: 'Invalid Email or password');
+                                      }
+                                      SharedPreferences prefs =
+                                          await SharedPreferences.getInstance();
 
-                                    await prefs.setBool('login', true);
+                                      await prefs.setBool('login', true);
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) {
+                                            return HomeWidget();
+                                          },
+                                        ),
+                                      );
+                                    } else {
+                                      Vibrate.feedback(FeedbackType.error);
+                                      Fluttertoast.showToast(
+                                          msg: 'Please fill all the fields');
+                                    }
+                                  },
+                                ),
+                                SizedBox(width: _width / 20),
+                                component2(
+                                  'Forgotten password!',
+                                  2.58,
+                                  () {
+                                    Vibrate.feedback(FeedbackType.success);
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) {
-                                          return HomeWidget();
+                                          return ForgotPassword();
                                         },
                                       ),
                                     );
-                                  } else {
-                                    Vibrate.feedback(FeedbackType.error);
-                                    Fluttertoast.showToast(
-                                        msg: 'Please fill all the fields');
-                                  }
-                                },
-                              ),
-                              SizedBox(width: _width / 20),
-                              component2(
-                                'Forgotten password!',
-                                2.58,
-                                () {
-                                  Vibrate.feedback(FeedbackType.success);
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) {
-                                        return ForgotPassword();
-                                      },
-                                    ),
-                                  );
-                                },
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      flex: 6,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          component2(
-                            'Create a new Account',
-                            2,
-                            () {
-                              Vibrate.feedback(FeedbackType.success);
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) {
-                                    return Register();
                                   },
                                 ),
-                              );
-                            },
-                          ),
-                          SizedBox(height: _height * .05),
-                        ],
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-              ],
+                      Expanded(
+                        flex: 6,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            component2(
+                              'Create a new Account',
+                              2,
+                              () {
+                                Vibrate.feedback(FeedbackType.success);
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) {
+                                      return Register();
+                                    },
+                                  ),
+                                );
+                              },
+                            ),
+                            SizedBox(height: _height * .05),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),
