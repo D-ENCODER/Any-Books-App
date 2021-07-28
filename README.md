@@ -5,7 +5,7 @@
 - 📫 How to reach me +91 7434076092
 
 
-![Alt Text](/assets/out.gif)
+![Alt Text](/assets/promote/out.gif)
 <!---
 D-ENCODER/D-ENCODER is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 You can click the Preview link to take a look at your changes.
