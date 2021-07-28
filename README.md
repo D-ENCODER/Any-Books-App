@@ -4,8 +4,11 @@
 - 💞️ I’m looking to collaborate on Projects that i wanna make
 - 📫 How to reach me +91 7434076092
 
-
+## Promotional video
 ![Alt Text](/assets/promote/out.gif)
+
+## Download the app
+[![Download Now]()](https://drive.google.com/uc?export=download&id=1YSe8U8vXluVIBPWTk_E5CusDmAC45UCy)
 
 ## VS Code Extentions that i use
 - [Auto Rename Tag](https://marketplace.visualstudio.com/items?itemName=formulahendry.auto-rename-tag)
