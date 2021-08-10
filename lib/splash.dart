@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:any_books/home.dart';
-import 'package:any_books/login.dart';
+import 'package:any_books/register.dart';
 import 'package:any_books/onboard.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -170,7 +170,7 @@ class _IsUserLoggedInState extends State<IsUserLoggedIn> {
         context,
         MaterialPageRoute(
           builder: (context) {
-            return Login();
+            return Register();
           },
         ),
       );
